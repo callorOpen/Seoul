@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.biz.st.database.BscVO;
-import com.biz.st.database.StringPagerAdapter;
+import com.biz.st.helper.StringPagerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -56,19 +56,28 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent bookmark = new Intent(MainActivity.this,BookmarkActivity.class);
                     startActivity(bookmark);
+                    finish();
+
                     return true;
                 case R.id.navigation_notifications:
                     Intent notification = new Intent(MainActivity.this, NotificationActivity.class);
                     startActivity(notification);
+                    finish();
+
                     return true;
                 case R.id.navigation_mypage:
                     Intent mypage = new Intent(MainActivity.this,MypageActivity.class);
                     startActivity(mypage);
+                    finish();
+
                     return true;
             }
             return false;
         }
     };
+
+
+    List<BscVO> dataList ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,84 +88,9 @@ public class MainActivity extends AppCompatActivity {
         genList = new ArrayList<>();
         favList = new ArrayList<>();
 
+        dataList = new ArrayList<BscVO>() ;
         vp = findViewById(R.id.view_pager);
-
-        btn_fav = findViewById(R.id.btn_fav);
         tab = findViewById(R.id.tab_layout);
-
-        btn_fav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                stringPagerAdapter = new StringPagerAdapter(getSupportFragmentManager(),favList);
-                vp.setAdapter(stringPagerAdapter);
-
-//
-//                List<PagerVO> pageList_FAV = FAV_PagerDao.getPager();
-//
-//
-//                FAV_PagerAdapter adapter_FAV = new FAV_PagerAdapter(getSupportFragmentManager(), pageList_FAV);
-//                vp.setAdapter(adapter_FAV);
-//                vp.setCurrentItem(0);
-//
-//
-//                tab.setupWithViewPager(vp);
-
-            }
-        });
-
-
-
-        btn_bcs = findViewById(R.id.btn_bcs);
-        btn_bcs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                stringPagerAdapter = new StringPagerAdapter(getSupportFragmentManager(),bscList);
-                vp.setAdapter(stringPagerAdapter);
-
-//                List<PagerVO> pageList_BCS = BCS_PagerDao.getPager();
-//
-//                vp = findViewById(R.id.view_pager);
-//                BCS_PagerAdapter adapter_BCS = new BCS_PagerAdapter(getSupportFragmentManager(), pageList_BCS);
-//                vp.setAdapter(adapter_BCS);
-//                vp.setCurrentItem(0);
-//
-//                tab = findViewById(R.id.tab_layout);
-//                tab.setupWithViewPager(vp);
-
-            }
-        });
-
-
-        btn_gen = findViewById(R.id.btn_gen);
-        btn_gen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                stringPagerAdapter = new StringPagerAdapter(getSupportFragmentManager(),genList);
-
-                vp.setAdapter(stringPagerAdapter);
-
-//                List<PagerVO> pageList_GEN = GEN_PagerDao.getPager();
-//
-//                GEN_PagerAdapter adapter_GEN = new GEN_PagerAdapter(getSupportFragmentManager(), pageList_GEN);
-//                vp.setAdapter(adapter_GEN);
-//                vp.setCurrentItem(0);
-//
-//                tab.setupWithViewPager(vp);
-
-            }
-        });
-
-        imgbtn_board = findViewById(R.id.imgbtn_board);
-        imgbtn_board.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent board = new Intent(MainActivity.this,BoardActivity.class);
-                startActivity(board);
-            }
-        });
 
         FirebaseDatabase.getInstance()  // db 정도 획득
                 .getReference()     // db 연결 객체 획득
@@ -173,23 +107,18 @@ public class MainActivity extends AppCompatActivity {
                         genList.clear();
                         favList.clear();
 
+                        Log.d("data",":" + dataSnapshot.getChildrenCount());
                         for(DataSnapshot sd : dataSnapshot.getChildren()){
-                        /*
-                            1. sd로 부터 각 칼럼값을 추출
-                            2. 추출된 값을 vo에 세팅하는 절차
-                            BscVO vo = new BscVO() ;
-                            vo.setNo(sd.getNo())
-                            vo.setTitle(sd.getTitle())
-                            vo.setMemo(sd.getMemo())
-                            vo.setGenre(sd.getGenre())
-                         */
-
 
                             BscVO vo = sd.getValue(BscVO.class);
+                            Log.d("VO",vo.bsc);
 
                             bscList.add(vo.bsc);
                             genList.add(vo.genre);
                             favList.add(vo.fav);
+
+                            dataList.add(vo);
+
 
                         }
                         // 현재 추출된 data는 중복된 data
@@ -200,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                         favList = new ArrayList<>(new TreeSet(favList));
 
 
+
                     }
 
                     @Override
@@ -207,6 +137,66 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("Data 오류", databaseError.toString());
                     }
                 });    // 데이터가 변화되면 알려달라
+
+        stringPagerAdapter = new StringPagerAdapter(getSupportFragmentManager(),favList);
+        vp.setAdapter(stringPagerAdapter);
+        tab.setupWithViewPager(vp);
+
+        btn_fav = findViewById(R.id.btn_fav);
+        btn_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d("Button","FAV");
+                stringPagerAdapter = new StringPagerAdapter(getSupportFragmentManager(),favList);
+                vp.setAdapter(stringPagerAdapter);
+                tab.setupWithViewPager(vp);
+
+
+            }
+        });
+
+
+
+        btn_bcs = findViewById(R.id.btn_bcs);
+        btn_bcs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d("Button","BSC");
+                stringPagerAdapter = new StringPagerAdapter(getSupportFragmentManager(),bscList);
+                vp.setAdapter(stringPagerAdapter);
+                tab.setupWithViewPager(vp);
+
+            }
+        });
+
+
+        btn_gen = findViewById(R.id.btn_gen);
+        btn_gen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d("Button","GEN");
+                stringPagerAdapter = new StringPagerAdapter(getSupportFragmentManager(),genList);
+                vp.setAdapter(stringPagerAdapter);
+                tab.setupWithViewPager(vp);
+
+            }
+        });
+
+        imgbtn_board = findViewById(R.id.imgbtn_board);
+        imgbtn_board.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent board = new Intent(MainActivity.this,BoardActivity.class);
+                startActivity(board);
+                finish();
+
+            }
+        });
+
+
 
 
 

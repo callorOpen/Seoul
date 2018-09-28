@@ -1,11 +1,11 @@
-package com.biz.st.database;
+package com.biz.st.helper;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.biz.st.database.StringFragment;
+import com.biz.st.frgment.StringFragment;
 
 import java.util.List;
 

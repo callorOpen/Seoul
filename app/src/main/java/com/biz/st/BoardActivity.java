@@ -28,18 +28,26 @@ public class BoardActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     Intent main = new Intent(BoardActivity.this,MainActivity.class);
                     startActivity(main);
+                    finish();
+
                     return true;
                 case R.id.navigation_bookmark:
                     Intent bookmark = new Intent(BoardActivity.this,BookmarkActivity.class);
                     startActivity(bookmark);
+                    finish();
+
                     return true;
                 case R.id.navigation_notifications:
                     Intent notification = new Intent(BoardActivity.this, NotificationActivity.class);
                     startActivity(notification);
+                    finish();
+
                     return true;
                 case R.id.navigation_mypage:
                     Intent mypage = new Intent(BoardActivity.this,MypageActivity.class);
                     startActivity(mypage);
+                    finish();
+
                     return true;
             }
             return false;
@@ -59,6 +67,8 @@ public class BoardActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent write = new Intent(BoardActivity.this, BoardWriteActivity.class);
                 startActivity(write);
+                finish();
+
             }
         });
 
@@ -66,7 +76,7 @@ public class BoardActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
+        navigation.setSelected(false);
 
     }
 

@@ -1,4 +1,4 @@
-package com.biz.st.frgment.frg_model;
+package com.biz.st.database;
 
 public class TextVO {
 

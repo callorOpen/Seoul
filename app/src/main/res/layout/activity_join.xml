@@ -5,6 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backlogo"
     android:padding="16dp"
     tools:context=".JoinActivity">
 
@@ -77,7 +78,7 @@
 
 
     <LinearLayout
-        android:id="@+id/join_id"
+        android:id="@+id/layout_userid"
         android:focusable="true"
         android:focusableInTouchMode="true"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -88,6 +89,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/label_userid"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="2.5"
@@ -100,7 +102,6 @@
             android:textSize="15sp" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/layout_id"
             android:layout_width="0dp"
             android:layout_weight="5.5"
             android:layout_height="60dp"
@@ -108,7 +109,7 @@
             android:textColorHint="@color/title">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/txt_id"
+                android:id="@+id/txt_userid"
                 android:textSize="15sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -117,6 +118,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
+            android:id="@+id/btn_id_check"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="2"
@@ -130,12 +132,13 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/join_pass"
-        app:layout_constraintTop_toBottomOf="@+id/join_id"
+        android:id="@+id/layout_password"
+        app:layout_constraintTop_toBottomOf="@+id/layout_userid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/label_password"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="2.5"
@@ -155,7 +158,9 @@
             android:textColorHint="@color/title">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/txt_password"
                 android:layout_width="match_parent"
+                android:inputType="textPassword"
                 android:textSize="15sp"
                 android:layout_height="match_parent"
                 />
@@ -165,12 +170,13 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/join_pass_check"
-        app:layout_constraintTop_toBottomOf="@+id/join_pass"
+        android:id="@+id/layout_password_check"
+        app:layout_constraintTop_toBottomOf="@+id/layout_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/label_password_check"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="2.5"
@@ -190,7 +196,9 @@
             android:textColorHint="@color/title">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/txt_password_check"
                 android:layout_width="match_parent"
+                android:inputType="textPassword"
                 android:textSize="15sp"
                 android:layout_height="match_parent"
                 />
@@ -200,12 +208,13 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/join_nick"
-        app:layout_constraintTop_toBottomOf="@+id/join_pass_check"
+        android:id="@+id/layout_nick"
+        app:layout_constraintTop_toBottomOf="@+id/layout_password_check"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/label_nick"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
@@ -225,6 +234,7 @@
             android:textColorHint="@color/title">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/txt_nick"
                 android:layout_width="match_parent"
                 android:textSize="15sp"
                 android:layout_height="match_parent"
@@ -235,13 +245,55 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/join_gender"
-        app:layout_constraintTop_toBottomOf="@+id/join_nick"
-        android:layout_marginTop="10dp"
+        android:id="@+id/layout_email"
+        app:layout_constraintTop_toBottomOf="@+id/layout_password_check"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/label_email"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2.5"
+            android:background="@drawable/button"
+            android:gravity="center"
+            android:fontFamily="@font/font_bold"
+            android:text="이메일"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_weight="5.5"
+            android:layout_height="60dp"
+            android:background="@drawable/back"
+            android:textColorHint="@color/title">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/txt_email"
+                android:layout_width="match_parent"
+                android:inputType="textEmailAddress"
+                android:textSize="15sp"
+                android:layout_height="match_parent"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+
+    <RadioGroup
+        android:id="@+id/layout_gender"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/layout_nick"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/label_gender"
             android:layout_width="105dp"
             android:layout_height="40dp"
             android:background="@drawable/button"
@@ -252,43 +304,36 @@
             android:textColor="#fff"
             android:textSize="15sp" />
 
-        <RadioGroup
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/gender_m"
+            android:text="남"
+            android:checked="true"
+            android:layout_weight="1"
+            android:fontFamily="@font/font_bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
 
-            <RadioButton
-                android:id="@+id/man"
-                android:text="남"
-                android:checked="true"
-                android:layout_weight="1"
-                android:fontFamily="@font/font_bold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/gender_w"
+            android:text="여"
+            android:layout_weight="1"
+            android:fontFamily="@font/font_bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
 
-            <RadioButton
-                android:id="@+id/woman"
-                android:text="여"
-                android:layout_weight="1"
-                android:fontFamily="@font/font_bold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+    </RadioGroup>
 
-        </RadioGroup>
-
-    </LinearLayout>
 
 
     <LinearLayout
-        android:id="@+id/join_age"
-        app:layout_constraintTop_toBottomOf="@+id/join_gender"
+        android:id="@+id/layout_age"
+        app:layout_constraintTop_toBottomOf="@+id/layout_gender"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/label_age"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="2.5"
@@ -300,7 +345,7 @@
             android:textSize="15sp" />
 
         <Spinner
-            android:id="@+id/join_age_spin"
+            android:id="@+id/txt_age"
             android:entries="@array/age_spin"
             android:layout_gravity="center"
             android:layout_weight="5.5"
@@ -312,7 +357,8 @@
 
 
     <Button
-        app:layout_constraintTop_toBottomOf="@+id/join_age"
+        android:id="@+id/btn_join"
+        app:layout_constraintTop_toBottomOf="@+id/layout_age"
         app:layout_constraintRight_toRightOf="parent"
         android:text="가입신청"
         android:layout_marginTop="10dp"

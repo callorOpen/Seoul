@@ -22,16 +22,22 @@ public class NotificationActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     Intent main = new Intent(NotificationActivity.this,MainActivity.class);
                     startActivity(main);
+                    finish();
+
                     return true;
                 case R.id.navigation_bookmark:
                     Intent bookmark = new Intent(NotificationActivity.this,BookmarkActivity.class);
                     startActivity(bookmark);
+                    finish();
+
                     return true;
                 case R.id.navigation_notifications:
                     return true;
                 case R.id.navigation_mypage:
                     Intent mypage = new Intent(NotificationActivity.this,MypageActivity.class);
                     startActivity(mypage);
+                    finish();
+
                     return true;
             }
             return false;
@@ -49,6 +55,8 @@ public class NotificationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent board = new Intent(NotificationActivity.this,BoardActivity.class);
                 startActivity(board);
+                finish();
+
             }
         });
 

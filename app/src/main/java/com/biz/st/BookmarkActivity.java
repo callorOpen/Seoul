@@ -22,6 +22,7 @@ public class BookmarkActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     Intent main = new Intent(BookmarkActivity.this,MainActivity.class);
                     startActivity(main);
+                    finish();
                     return true;
                 case R.id.navigation_bookmark:
 
@@ -29,10 +30,14 @@ public class BookmarkActivity extends AppCompatActivity {
                 case R.id.navigation_notifications:
                     Intent notification = new Intent(BookmarkActivity.this, NotificationActivity.class);
                     startActivity(notification);
+                    finish();
+
                     return true;
                 case R.id.navigation_mypage:
                     Intent mypage = new Intent(BookmarkActivity.this,MypageActivity.class);
                     startActivity(mypage);
+                    finish();
+
                     return true;
             }
             return false;
@@ -50,6 +55,8 @@ public class BookmarkActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent board = new Intent(BookmarkActivity.this,BoardActivity.class);
                 startActivity(board);
+                finish();
+
             }
         });
 
